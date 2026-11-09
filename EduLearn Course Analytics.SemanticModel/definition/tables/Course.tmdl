@@ -1,0 +1,116 @@
+table Course
+	lineageTag: fe20aeaa-ccc9-41eb-850a-d0698449d0d9
+
+	column CourseKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 4b1a0d06-f204-4348-a2f6-9803df3161eb
+		summarizeBy: none
+		sourceColumn: CourseKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CourseName
+		dataType: string
+		lineageTag: 13b0a593-e716-4f9c-956d-a6419018d784
+		summarizeBy: none
+		sourceColumn: CourseName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: f8aefcf3-f362-4ade-a1ba-98d9c66009cc
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubCategory
+		dataType: string
+		lineageTag: 820c7c5e-6891-4b84-854c-d53fb90b5bd3
+		summarizeBy: none
+		sourceColumn: SubCategory
+
+		annotation SummarizationSetBy = Automatic
+
+	column Level
+		dataType: string
+		lineageTag: 5a3dc656-4002-4c33-acde-cc8d2922f52f
+		summarizeBy: none
+		sourceColumn: Level
+
+		annotation SummarizationSetBy = Automatic
+
+	column DurationHours
+		dataType: int64
+		formatString: 0
+		lineageTag: 33df412f-cb8d-4533-9aad-e4665734b3ba
+		summarizeBy: sum
+		sourceColumn: DurationHours
+
+		annotation SummarizationSetBy = Automatic
+
+	column ListPrice
+		dataType: int64
+		formatString: 0
+		lineageTag: 9dcc2c5a-d5ef-404b-a7a8-9caa2a258ea8
+		summarizeBy: sum
+		sourceColumn: ListPrice
+
+		annotation SummarizationSetBy = Automatic
+
+	column Language
+		dataType: string
+		lineageTag: 344d5c4c-0519-4305-9128-dd1818146467
+		summarizeBy: none
+		sourceColumn: Language
+
+		annotation SummarizationSetBy = Automatic
+
+	column LaunchDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 19d36fc5-5b04-4ccb-8042-0abe82ba1438
+		summarizeBy: none
+		sourceColumn: LaunchDate
+
+		variation Variation
+			isDefault
+			relationship: dce2e08d-14e3-46f6-8067-a6806e07d1b0
+			defaultHierarchy: LocalDateTable_1745bf79-04b5-4e28-9ca4-67f5281d0a0c.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Level Order' =
+			
+			SWITCH (
+			    Course[Level],
+			    "Beginner", 1,
+			    "Intermediate", 2,
+			    "Advanced", 3
+			)
+		isHidden
+		formatString: 0
+		lineageTag: 6596e49c-1a3e-4910-9f4d-8543e48f41e9
+		summarizeBy: sum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Course = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\Data\EduLearn_Analytics_Practice_Dataset_final.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Course", Kind = "Sheet"]}[Data],
+				  #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"CourseKey", Int64.Type}, {"CourseName", type text}, {"Category", type text}, {"SubCategory", type text}, {"Level", type text}, {"DurationHours", Int64.Type}, {"ListPrice", Int64.Type}, {"Language", type text}, {"LaunchDate", type date}})
+				in
+				  #"Changed column type"
+
+	annotation PBI_ResultType = Table
+

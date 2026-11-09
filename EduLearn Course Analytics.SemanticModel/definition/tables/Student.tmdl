@@ -1,0 +1,134 @@
+table Student
+	lineageTag: 69649fd9-5fbf-4fdb-863f-6df7f9587301
+
+	column StudentKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 22afa040-0b70-4cb5-bc84-ea26b7026291
+		summarizeBy: none
+		sourceColumn: StudentKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column StudentName
+		dataType: string
+		lineageTag: 07ca3907-2346-4168-933b-f5a2bc90387d
+		summarizeBy: none
+		sourceColumn: StudentName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 65d06f66-22ab-4ee8-ae2c-ff1c50ae38ec
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Age
+		dataType: int64
+		formatString: 0
+		lineageTag: c4c8d0bc-41b1-48d6-9cb0-f2573bbdc388
+		summarizeBy: sum
+		sourceColumn: Age
+
+		annotation SummarizationSetBy = Automatic
+
+	column AgeGroup
+		dataType: string
+		lineageTag: c3b50cde-e2c3-4a54-985c-637fb5fea141
+		summarizeBy: none
+		sourceColumn: AgeGroup
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: ef3efcf9-f919-4835-b056-c2e0446f5c5b
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: 5e363014-0df2-418b-934d-18c698c4006a
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: aee8e76c-46fb-47ff-a4ca-f4ca0925f4cc
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Latitude
+		dataType: double
+		lineageTag: e4e964ee-070c-494b-91e9-6067e1a2dfbe
+		summarizeBy: sum
+		sourceColumn: Latitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Longitude
+		dataType: double
+		lineageTag: 976a055f-bb19-465b-9393-38d9a37f4e70
+		summarizeBy: sum
+		sourceColumn: Longitude
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column EducationLevel
+		dataType: string
+		lineageTag: 5bc404d0-2623-4ed2-b274-814b9b59aaf7
+		summarizeBy: none
+		sourceColumn: EducationLevel
+
+		annotation SummarizationSetBy = Automatic
+
+	column AcquisitionChannel
+		dataType: string
+		lineageTag: 770e478d-836b-46fd-bdbd-5449217982f1
+		summarizeBy: none
+		sourceColumn: AcquisitionChannel
+
+		annotation SummarizationSetBy = Automatic
+
+	column SignupDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 652ed207-2799-4fc3-b548-536384016eb5
+		summarizeBy: none
+		sourceColumn: SignupDate
+
+		variation Variation
+			isDefault
+			relationship: 14f6aeca-5032-46bd-b9ea-05fba351e24f
+			defaultHierarchy: LocalDateTable_543c0378-99ab-4236-ae3e-9d2e7a70476d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Student = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\Data\EduLearn_Analytics_Practice_Dataset_final.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Student", Kind = "Sheet"]}[Data],
+				  #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"StudentKey", Int64.Type}, {"StudentName", type text}, {"Gender", type text}, {"Age", Int64.Type}, {"AgeGroup", type text}, {"Country", type text}, {"Region", type text}, {"City", type text}, {"Latitude", type number}, {"Longitude", type number}, {"EducationLevel", type text}, {"AcquisitionChannel", type text}, {"SignupDate", type date}})
+				in
+				  #"Changed column type"
+
+	annotation PBI_ResultType = Table
+

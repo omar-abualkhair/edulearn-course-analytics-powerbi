@@ -1,0 +1,185 @@
+table _Measures
+	lineageTag: fa40a9b0-e3e9-4153-9a27-d7bbf6857d9e
+
+	measure 'Avg Rating' = AVERAGE ( Enrollments[Rating] )
+		lineageTag: db275032-d0a8-4cd2-80e9-a897d3cba427
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Score' = AVERAGE ( Enrollments[FinalScore] )
+		lineageTag: 789e87a7-3904-46e1-9322-a807c41002a1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Completion Rate' = ```
+			
+			    DIVIDE ( SUM ( Enrollments[IsCompleted] ), [Enrollments] )
+			```
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 569b6683-6cdb-457a-81b0-fafeef1905e4
+
+	measure Enrollments = COUNTROWS ( Enrollments )
+		formatString: 0
+		lineageTag: 409a7b42-f030-4389-a147-67e27a31bf43
+
+	measure 'Net Revenue' = ```
+			
+			    SUM ( Enrollments[PricePaid] ) - SUM ( Enrollments[RefundAmount] )
+			```
+		formatString: 0
+		lineageTag: f5823617-3c79-4f8a-9fcf-4bbb237f734c
+
+	measure 'Net Revenue Target' = SUM ( Targets[NetRevenueTarget] )
+		formatString: 0
+		lineageTag: e8c03598-bcfb-49c1-9102-b8555d212559
+
+	measure 'Refund Amount' = SUM ( Enrollments[RefundAmount] )
+		formatString: 0
+		lineageTag: f2c28c53-7d70-4e62-9208-188969d5855b
+
+	measure 'Revenue vs Target %' = ```
+			
+			    DIVIDE (
+			        [Net Revenue],
+			        [Net Revenue Target (to date)]
+			    )
+			```
+		lineageTag: 98300078-1479-4f5b-b4c1-90726339311b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Net Revenue Target (to date)' =
+			
+			VAR LastKey =
+			    CALCULATE (
+			        MAX ( Enrollments[EnrollmentDateKey] ),
+			        REMOVEFILTERS ( Enrollments )
+			    )
+			RETURN
+			    CALCULATE (
+			        [Net Revenue Target],
+			        KEEPFILTERS ( 'Date'[DateKey] <= LastKey )
+			    )
+		formatString: 0
+		lineageTag: 9dbaf037-1ea8-4fae-abd2-e3d7ea3c5703
+
+	measure 'Completion Rate (Matured)' =
+			
+			VAR MaxEnrollDate =
+			    CALCULATE (
+			        MAX ( Enrollments[EnrollDate] ),
+			        REMOVEFILTERS ( Enrollments )
+			    )
+			RETURN
+			    CALCULATE (
+			        [Completion Rate],
+			        KEEPFILTERS ( Enrollments[EnrollDate] <= MaxEnrollDate - 120 )
+			    )
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2f4651f3-e482-434a-ab53-ae4793a7ee58
+
+	measure Ratings = COUNT ( Enrollments[Rating] )
+		formatString: 0
+		lineageTag: c5659f7b-5c12-4f74-9ce0-60578ff459c5
+
+	measure 'Avg Rating (Reliable)' =
+			
+			IF ( [Ratings] >= 10, [Avg Rating] )
+		lineageTag: af452f90-09ac-47dd-996d-f077d249edd8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Title Net Revenue' =
+			
+			VAR SelectedCategory =
+			    IF (
+			        ISFILTERED ( Course[Category] ),
+			        IF (
+			            HASONEVALUE ( Course[Category] ),
+			            SELECTEDVALUE ( Course[Category] ),
+			            COUNTROWS ( VALUES ( Course[Category] ) ) & " categories"
+			        ),
+			        "All categories"
+			    )
+			VAR SelectedYear =
+			    IF (
+			        HASONEVALUE ( 'Date'[Year] ),
+			        FORMAT ( SELECTEDVALUE ( 'Date'[Year] ), "0" ),
+			        "All years"
+			    )
+			RETURN
+			    "Net Revenue by Month · " & SelectedCategory & " · " & SelectedYear
+		lineageTag: eb6f709b-dc84-4db4-9660-58ee13ee6742
+
+	measure 'Instructor Status Color' =
+			
+			VAR Completion = [Completion Rate]
+			VAR Rating = [Avg Rating]
+			VAR LowCompletion = Completion < 0.60
+			VAR LowRating = [Ratings] >= 10 && Rating < 3.3
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        LowCompletion && LowRating, "#D64554",  // red: both weak
+			        LowCompletion || LowRating, "#D9B300",  // amber: one weak
+			        "#1AAB40"                                // green: healthy
+			    )
+		lineageTag: a5b81591-bb20-4968-af63-05b34db165fb
+
+	measure 'Title Instructor' =
+			
+			"Instructor: "
+			    & SELECTEDVALUE ( Instructor[InstructorName], "(select one)" )
+		lineageTag: 08266a41-63a6-43f6-8e46-34ba7ac62742
+
+	measure 'Selected Metric Name' =
+			
+			VAR Sel =
+			    SELECTCOLUMNS (
+			        SUMMARIZE ( Metric, Metric[Metric], Metric[Metric Fields] ),
+			        "Name", Metric[Metric]
+			    )
+			RETURN
+			    IF ( COUNTROWS ( Sel ) = 1, MAXX ( Sel, [Name] ) )
+		lineageTag: 21ddfb13-c89a-49a6-a391-0f73725e5956
+
+	measure 'Selected Dimension Name' =
+			
+			VAR Sel =
+			    SELECTCOLUMNS (
+			        SUMMARIZE (
+			            'Dimension',
+			            'Dimension'[Dimension],
+			            'Dimension'[Dimension Fields]
+			        ),
+			        "Name", 'Dimension'[Dimension]
+			    )
+			RETURN
+			    IF ( COUNTROWS ( Sel ) = 1, MAXX ( Sel, [Name] ) )
+		lineageTag: c90084a0-d070-4828-9dea-b0d215378d93
+
+	measure 'Title Metric' =
+			
+			IF (
+			    NOT ISBLANK ( [Selected Metric Name] ),
+			    [Selected Metric Name] & " by " & [Selected Dimension Name],
+			    "Select one metric"
+			)
+		lineageTag: 6446b72e-4799-4745-9a87-7dd36aa374cc
+
+	column Column
+		isHidden
+		formatString: 0
+		lineageTag: 05544819-f19c-48c9-8196-dabaeb78527d
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition _Measures = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 267fd1baa6e440098aa5bcd3628131e6
+

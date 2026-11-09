@@ -1,0 +1,212 @@
+table Enrollments
+	lineageTag: 465c5cce-b8a1-4f23-b0a7-1cd3ec21e4f9
+
+	column EnrollmentID
+		dataType: string
+		lineageTag: 5e2ade95-00b7-4338-bc36-011c5e481378
+		summarizeBy: none
+		sourceColumn: EnrollmentID
+
+		annotation SummarizationSetBy = Automatic
+
+	column StudentKey
+		dataType: int64
+		formatString: 0
+		lineageTag: bc292a8f-53c3-420e-b820-e6d53dbfbfb2
+		summarizeBy: none
+		sourceColumn: StudentKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CourseKey
+		dataType: int64
+		formatString: 0
+		lineageTag: b2168464-501c-4d75-bb48-ce01694d45b4
+		summarizeBy: none
+		sourceColumn: CourseKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column InstructorKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 4e92f77f-7df4-4b45-9b77-e2a5fd1a1aaa
+		summarizeBy: none
+		sourceColumn: InstructorKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column EnrollmentDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: dbe6fe06-f7e4-4412-9805-695f2eefc649
+		summarizeBy: none
+		sourceColumn: EnrollmentDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompletionDateKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 5a1ac385-bc50-4446-bd1a-954e3a077f7f
+		summarizeBy: count
+		sourceColumn: CompletionDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column PricePaid
+		dataType: int64
+		formatString: 0
+		lineageTag: b4e2108a-352c-4fe9-beb6-eb8876998ed3
+		summarizeBy: sum
+		sourceColumn: PricePaid
+
+		annotation SummarizationSetBy = Automatic
+
+	column DiscountPct
+		dataType: double
+		lineageTag: 9d5d76c6-ce89-42f3-80f9-7fe6b527ef75
+		summarizeBy: sum
+		sourceColumn: DiscountPct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column RefundAmount
+		dataType: int64
+		formatString: 0
+		lineageTag: 55f53490-2792-4e58-a697-235c8e66b7fb
+		summarizeBy: sum
+		sourceColumn: RefundAmount
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentMethod
+		dataType: string
+		lineageTag: 34433bc0-4f16-4b98-afcf-1dd308d6a671
+		summarizeBy: none
+		sourceColumn: PaymentMethod
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeviceType
+		dataType: string
+		lineageTag: 400b45ac-06bb-4f78-b9e5-4fb37ceb5d5e
+		summarizeBy: none
+		sourceColumn: DeviceType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: b1a6b9d3-cd42-4953-96b1-5b30a0958256
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsStarted
+		dataType: int64
+		formatString: 0
+		lineageTag: 580baef4-2599-4a34-aec5-a91d74f5034f
+		summarizeBy: sum
+		sourceColumn: IsStarted
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCompleted
+		dataType: int64
+		formatString: 0
+		lineageTag: 738581a1-c018-4a8d-9558-56d9ea8a4c34
+		summarizeBy: sum
+		sourceColumn: IsCompleted
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsCertified
+		dataType: int64
+		formatString: 0
+		lineageTag: 51e35b33-6b67-4d8f-8943-2f479193c502
+		summarizeBy: sum
+		sourceColumn: IsCertified
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProgressPct
+		dataType: double
+		lineageTag: 41a00262-5d3c-49c6-a24b-ea8c3977870e
+		summarizeBy: sum
+		sourceColumn: ProgressPct
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column HoursWatched
+		dataType: double
+		lineageTag: e6e25c68-215a-46a9-a677-1176260ad0bd
+		summarizeBy: sum
+		sourceColumn: HoursWatched
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column DaysToComplete
+		dataType: int64
+		formatString: 0
+		lineageTag: d9edad6f-b1c9-4bde-9c32-763115201a8e
+		summarizeBy: sum
+		sourceColumn: DaysToComplete
+
+		annotation SummarizationSetBy = Automatic
+
+	column FinalScore
+		dataType: double
+		lineageTag: 47d0bb0e-0d92-4669-b265-31a67ed5383d
+		summarizeBy: sum
+		sourceColumn: FinalScore
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Rating
+		dataType: int64
+		formatString: 0
+		lineageTag: d36ef075-e837-4186-b4ea-6c34e882d60a
+		summarizeBy: sum
+		sourceColumn: Rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column EnrollDate = RELATED ( 'Date'[Date] )
+		formatString: Long Date
+		lineageTag: 80750bb1-adb9-4aac-ab92-4a57a64651b7
+		summarizeBy: none
+
+		variation Variation
+			isDefault
+			relationship: ac287390-4738-4475-9d1d-40f99e50e112
+			defaultHierarchy: LocalDateTable_200c3c20-534f-483d-b95c-e167dab83605.'Date Hierarchy'
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Enrollments = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\Data\EduLearn_Analytics_Practice_Dataset_final.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Enrollments", Kind = "Sheet"]}[Data],
+				  #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"EnrollmentID", type text}, {"StudentKey", Int64.Type}, {"CourseKey", Int64.Type}, {"InstructorKey", Int64.Type}, {"EnrollmentDateKey", Int64.Type}, {"CompletionDateKey", Int64.Type}, {"PricePaid", Int64.Type}, {"DiscountPct", type number}, {"RefundAmount", Int64.Type}, {"PaymentMethod", type text}, {"DeviceType", type text}, {"Status", type text}, {"IsStarted", Int64.Type}, {"IsCompleted", Int64.Type}, {"IsCertified", Int64.Type}, {"ProgressPct", type number}, {"HoursWatched", type number}, {"DaysToComplete", Int64.Type}, {"FinalScore", type number}, {"Rating", Int64.Type}})
+				in
+				  #"Changed column type"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,73 @@
+table Targets
+	lineageTag: 0e0f7616-c795-4d50-bae1-d5aab4bd9604
+
+	column TargetKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a240a4d-92bf-4642-b66d-e035873ba738
+		summarizeBy: count
+		sourceColumn: TargetKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthStartDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 021d3603-5a53-46f7-ac3f-cba0eb4f5085
+		summarizeBy: none
+		sourceColumn: MonthStartDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EnrollmentsTarget
+		dataType: int64
+		formatString: 0
+		lineageTag: 1e2673f9-c1a5-4679-aeb9-5b16f6fd9d00
+		summarizeBy: sum
+		sourceColumn: EnrollmentsTarget
+
+		annotation SummarizationSetBy = Automatic
+
+	column NetRevenueTarget
+		dataType: int64
+		formatString: 0
+		lineageTag: 236a13bc-c21e-4eac-99ba-2104c1fc705b
+		summarizeBy: sum
+		sourceColumn: NetRevenueTarget
+
+		annotation SummarizationSetBy = Automatic
+
+	column CompletionRateTarget
+		dataType: double
+		lineageTag: d0f769a1-9e44-485d-bea5-dca7b50b533c
+		summarizeBy: sum
+		sourceColumn: CompletionRateTarget
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AvgScoreTarget
+		dataType: int64
+		formatString: 0
+		lineageTag: de0fa043-0ec7-43a2-b494-34e167c71f51
+		summarizeBy: sum
+		sourceColumn: AvgScoreTarget
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Targets = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\Data\EduLearn_Analytics_Practice_Dataset_final.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Targets", Kind = "Sheet"]}[Data],
+				  #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"TargetKey", Int64.Type}, {"MonthStartDate", type date}, {"EnrollmentsTarget", Int64.Type}, {"NetRevenueTarget", Int64.Type}, {"CompletionRateTarget", type number}, {"AvgScoreTarget", Int64.Type}})
+				in
+				  #"Changed column type"
+
+	annotation PBI_ResultType = Table
+

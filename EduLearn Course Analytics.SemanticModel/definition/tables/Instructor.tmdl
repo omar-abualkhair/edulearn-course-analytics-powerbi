@@ -1,0 +1,82 @@
+table Instructor
+	lineageTag: ec0b21ad-70a8-4260-a09e-5438cede5ca4
+
+	column InstructorKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 05836d48-8ff3-469e-9b61-c6895138b184
+		summarizeBy: none
+		sourceColumn: InstructorKey
+
+		annotation SummarizationSetBy = Automatic
+
+	column InstructorName
+		dataType: string
+		lineageTag: 62c3c18a-4d94-4083-90c0-169eda1fbd14
+		summarizeBy: none
+		sourceColumn: InstructorName
+
+		annotation SummarizationSetBy = Automatic
+
+	column Specialty
+		dataType: string
+		lineageTag: 548e6149-fed1-47d0-8ecd-56e6d76f3c86
+		summarizeBy: none
+		sourceColumn: Specialty
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 256cd555-0713-442d-a549-972f54c3efc5
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: d3f0f5f1-bcdf-448f-b476-fdb6f492f5ff
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearsExperience
+		dataType: int64
+		formatString: 0
+		lineageTag: cd993d65-c185-4704-ac46-1854d4380e48
+		summarizeBy: sum
+		sourceColumn: YearsExperience
+
+		annotation SummarizationSetBy = Automatic
+
+	column JoinDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b2c99444-a810-4033-9489-7e42c83ab0da
+		summarizeBy: none
+		sourceColumn: JoinDate
+
+		variation Variation
+			isDefault
+			relationship: e13d080f-8138-49fe-882d-771497b3209c
+			defaultHierarchy: LocalDateTable_5ecfdea3-e8bc-46d9-9120-cd933a3dccae.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Instructor = m
+		mode: import
+		source =
+				let
+				  Source = Excel.Workbook(File.Contents("C:\Data\EduLearn_Analytics_Practice_Dataset_final.xlsx"), null, true),
+				  #"Navigation 1" = Source{[Item = "Instructor", Kind = "Sheet"]}[Data],
+				  #"Promoted headers" = Table.PromoteHeaders(#"Navigation 1", [PromoteAllScalars = true]),
+				  #"Changed column type" = Table.TransformColumnTypes(#"Promoted headers", {{"InstructorKey", Int64.Type}, {"InstructorName", type text}, {"Specialty", type text}, {"Gender", type text}, {"Country", type text}, {"YearsExperience", Int64.Type}, {"JoinDate", type date}})
+				in
+				  #"Changed column type"
+
+	annotation PBI_ResultType = Table
+

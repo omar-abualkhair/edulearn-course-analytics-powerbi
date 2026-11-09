@@ -1,0 +1,51 @@
+table Dimension
+	lineageTag: bdf329c9-04cd-4f47-9ddc-8852876a1650
+
+	column Dimension
+		lineageTag: 093661d0-829c-4a51-869f-086464666332
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Dimension Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Dimension Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dimension Fields'
+		isHidden
+		lineageTag: 9594ca34-19f7-4ce7-8015-a3351a58aeb7
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Dimension Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dimension Order'
+		isHidden
+		formatString: 0
+		lineageTag: 3947358d-43b1-4778-b459-f3bd1af1a54f
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dimension = calculated
+		mode: import
+		source =
+				{
+				    ( "Category",            NAMEOF ( 'Course'[Category] ), 0 ),
+				    ( "Level",               NAMEOF ( 'Course'[Level] ), 1 ),
+				    ( "Country",             NAMEOF ( 'Student'[Country] ), 2 ),
+				    ( "Acquisition Channel", NAMEOF ( 'Student'[AcquisitionChannel] ), 3 ),
+				    ( "Device Type",         NAMEOF ( 'Enrollments'[DeviceType] ), 4 )
+				}
+
+	annotation PBI_Id = 08c0cea5d80f450390a5f3f5e53c44af
+

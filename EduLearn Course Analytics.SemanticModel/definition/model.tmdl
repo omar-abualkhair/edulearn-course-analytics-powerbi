@@ -1,0 +1,34 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Date","Student","Course","Instructor","Enrollments","Targets"]
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","TMDLView_Desktop","DevMode"]
+
+ref table Date
+ref table DateTableTemplate_bfb2a9f3-32d5-4293-b3d2-6a6566cfed12
+ref table LocalDateTable_4d9a6511-100d-4ebc-8b7c-e5d048ee2615
+ref table Student
+ref table LocalDateTable_543c0378-99ab-4236-ae3e-9d2e7a70476d
+ref table Course
+ref table LocalDateTable_1745bf79-04b5-4e28-9ca4-67f5281d0a0c
+ref table Instructor
+ref table LocalDateTable_5ecfdea3-e8bc-46d9-9120-cd933a3dccae
+ref table Enrollments
+ref table Targets
+ref table _Measures
+ref table LocalDateTable_cdb641e3-ff7c-438a-bbfb-78b32207c598
+ref table LocalDateTable_200c3c20-534f-483d-b95c-e167dab83605
+ref table Metric
+ref table Dimension
+
+ref cultureInfo en-US
+

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "6fb429ce2ae0b3b515d8",
+  "position": {
+    "x": 250.00000000000003,
+    "y": 202.85714285714286,
+    "z": 3003,
+    "height": 338.57142857142861,
+    "width": 742.85714285714289,
+    "tabOrder": 3003
+  },
+  "visual": {
+    "visualType": "clusteredColumnChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Course"
+                    }
+                  },
+                  "Property": "Level"
+                }
+              },
+              "queryRef": "Course.Level",
+              "nativeQueryRef": "Level",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "_Measures"
+                    }
+                  },
+                  "Property": "Completion Rate (Matured)"
+                }
+              },
+              "queryRef": "_Measures.Completion Rate (Matured)",
+              "nativeQueryRef": "Completion Rate (Matured)"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "_Measures"
+                  }
+                },
+                "Property": "Completion Rate (Matured)"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

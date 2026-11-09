@@ -1,0 +1,56 @@
+relationship 632f8d35-433a-4782-b745-cbd1283a1a89
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.YearMonth
+	toColumn: LocalDateTable_4d9a6511-100d-4ebc-8b7c-e5d048ee2615.Date
+
+relationship 14f6aeca-5032-46bd-b9ea-05fba351e24f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Student.SignupDate
+	toColumn: LocalDateTable_543c0378-99ab-4236-ae3e-9d2e7a70476d.Date
+
+relationship dce2e08d-14e3-46f6-8067-a6806e07d1b0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Course.LaunchDate
+	toColumn: LocalDateTable_1745bf79-04b5-4e28-9ca4-67f5281d0a0c.Date
+
+relationship e13d080f-8138-49fe-882d-771497b3209c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Instructor.JoinDate
+	toColumn: LocalDateTable_5ecfdea3-e8bc-46d9-9120-cd933a3dccae.Date
+
+relationship 4bbc53b5-fd1a-3e21-7bbe-e4b93672e0ad
+	fromColumn: Enrollments.CourseKey
+	toColumn: Course.CourseKey
+
+relationship de323e86-01e4-209b-c99f-5ae1bdfffcd2
+	fromColumn: Enrollments.StudentKey
+	toColumn: Student.StudentKey
+
+relationship 7599610e-e1d3-f597-2270-43ebf0d06d20
+	fromColumn: Enrollments.EnrollmentDateKey
+	toColumn: Date.DateKey
+
+relationship b13cffd9-cf65-6abf-82e9-7d19cd4de17a
+	isActive: false
+	fromColumn: Enrollments.CompletionDateKey
+	toColumn: Date.DateKey
+
+relationship 37a97633-563a-6f3f-11cd-40251a73e3e1
+	fromColumn: Enrollments.InstructorKey
+	toColumn: Instructor.InstructorKey
+
+relationship ba1a803a-ae75-4b9d-bd26-11a08bda5c5a
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Date.Date
+	toColumn: LocalDateTable_cdb641e3-ff7c-438a-bbfb-78b32207c598.Date
+
+relationship f88372b1-b603-1800-b67b-641e449f4c08
+	crossFilteringBehavior: bothDirections
+	fromColumn: Targets.MonthStartDate
+	toColumn: Date.Date
+
+relationship ac287390-4738-4475-9d1d-40f99e50e112
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Enrollments.EnrollDate
+	toColumn: LocalDateTable_200c3c20-534f-483d-b95c-e167dab83605.Date
+

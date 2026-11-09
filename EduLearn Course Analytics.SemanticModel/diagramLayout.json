@@ -1,0 +1,223 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 78.980950829656791
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 988.77519907316548,
+            "y": 537.42361082819355
+          },
+          "nodeIndex": "Course",
+          "nodeLineageTag": "fe20aeaa-ccc9-41eb-850a-d0698449d0d9",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "660d84f2-98ee-4d0c-8e66-a6f68c6af832",
+          "size": {
+            "height": 309,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 459.50976749423546,
+            "y": 0
+          },
+          "nodeIndex": "Enrollments",
+          "nodeLineageTag": "465c5cce-b8a1-4f23-b0a7-1cd3ec21e4f9",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 398.85958513825125,
+            "y": 541.79914520161208
+          },
+          "nodeIndex": "Instructor",
+          "nodeLineageTag": "ec0b21ad-70a8-4260-a09e-5438cede5ca4",
+          "size": {
+            "height": 370,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 991.47918357137,
+            "y": 0
+          },
+          "nodeIndex": "Student",
+          "nodeLineageTag": "69649fd9-5fbf-4fdb-863f-6df7f9587301",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 410
+          },
+          "nodeIndex": "Targets",
+          "nodeLineageTag": "0e0f7616-c795-4d50-bae1-d5aab4bd9604",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {},
+          "nodeIndex": "_Measures",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "Dimension",
+          "nodeLineageTag": "bdf329c9-04cd-4f47-9ddc-8852876a1650",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "Metric",
+          "nodeLineageTag": "f45a2e62-a205-4dfa-92fd-fccb5a166fde",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 79.553182037699813,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 63.533213029940292
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 859.26654417224643,
+            "y": 222.22676328466463
+          },
+          "nodeIndex": "Course",
+          "nodeLineageTag": "fe20aeaa-ccc9-41eb-850a-d0698449d0d9",
+          "size": {
+            "height": 294.25018296626246,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 47.245059910912957,
+            "y": 738.422788237232
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "660d84f2-98ee-4d0c-8e66-a6f68c6af832",
+          "size": {
+            "height": 297.21592973964823,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 420.06014177197153,
+            "y": 535.23003983312412
+          },
+          "nodeIndex": "Enrollments",
+          "nodeLineageTag": "465c5cce-b8a1-4f23-b0a7-1cd3ec21e4f9",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 5,
+          "expandedHeight": 544.97438472325246
+        },
+        {
+          "location": {
+            "x": 860.909980598858,
+            "y": 877.9769010971612
+          },
+          "nodeIndex": "Instructor",
+          "nodeLineageTag": "ec0b21ad-70a8-4260-a09e-5438cede5ca4",
+          "size": {
+            "height": 239.25091483131234,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 468.95096504165451,
+            "y": 80.491583551925714
+          },
+          "nodeIndex": "Student",
+          "nodeLineageTag": "69649fd9-5fbf-4fdb-863f-6df7f9587301",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 290.46962760042766
+          },
+          "nodeIndex": "Targets",
+          "nodeLineageTag": "0e0f7616-c795-4d50-bae1-d5aab4bd9604",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 3
+        }
+      ],
+      "name": "Layout 1",
+      "zoomValue": 64.073519832290359,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Layout 1",
+  "defaultDiagram": "All tables"
+}

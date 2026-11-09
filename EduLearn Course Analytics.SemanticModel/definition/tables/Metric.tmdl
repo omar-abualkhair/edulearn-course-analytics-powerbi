@@ -1,0 +1,52 @@
+table Metric
+	lineageTag: f45a2e62-a205-4dfa-92fd-fccb5a166fde
+
+	column Metric
+		lineageTag: 28263d00-72e2-423d-9680-cbe4d6b03faf
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Metric Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Metric Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Metric Fields'
+		isHidden
+		lineageTag: 25b56d79-4d32-4262-a413-ff120a5dce91
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Metric Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Metric Order'
+		isHidden
+		formatString: 0
+		lineageTag: 25c036cf-f85b-4d01-bdb4-9089c1dd1958
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Metric = calculated
+		mode: import
+		source =
+				{
+				    ( "Net Revenue",         NAMEOF ( '_Measures'[Net Revenue] ), 0 ),
+				    ( "Enrollments",         NAMEOF ( '_Measures'[Enrollments] ), 1 ),
+				    ( "Completion Rate",     NAMEOF ( '_Measures'[Completion Rate] ), 2 ),
+				    ( "Completion (Matured)",NAMEOF ( '_Measures'[Completion Rate (Matured)] ), 3 ),
+				    ( "Avg Score",           NAMEOF ( '_Measures'[Avg Score] ), 4 ),
+				    ( "Avg Rating",          NAMEOF ( '_Measures'[Avg Rating] ), 5 )
+				}
+
+	annotation PBI_Id = c5ec301d571c44c6a6bda027b55b003f
+
